@@ -1,0 +1,67 @@
+# GC10-DET数据集的EfficientDet配置
+
+# 模型配置
+model_name: 'efficientdet-d0'  # 可选: efficientdet-d0, efficientdet-d1, efficientdet-d2, ..., efficientdet-d7
+pretrained_ckpt: null  # 使用预训练权重
+num_classes: 10  # GC10-DET有10个类别
+
+# 训练数据配置
+train_file_pattern: 'datasets/GC10-DET/tfrecords/gc10_det*train*' 
+val_file_pattern: 'datasets/GC10-DET/tfrecords/gc10_det*val*'
+val_json_file: 'datasets/GC10-DET/annotations/gc10_det_val.json'
+
+# 训练超参数
+batch_size: 8  # 根据GPU显存调整
+num_examples_per_epoch: 1840  # 训练集样本数量，GC10-DET大约有2300张图像，约80%用于训练
+eval_samples: 460  # 验证集样本数量，GC10-DET大约有2300张图像，约20%用于验证
+num_epochs: 50  # 训练轮数
+steps_per_epoch: null  # 自动计算
+
+# 优化器配置
+learning_rate: 0.08  # 初始学习率
+lr_warmup_epoch: 5
+optimizer: 'sgd'  # 优化器类型: sgd, adam
+momentum: 0.9  # SGD动量
+weight_decay: 4.0e-5  # 权重衰减
+
+# 学习率调度
+lr_decay_method: 'cosine'  # 学习率衰减策略: stepwise, cosine
+lr_decay_epochs: [35, 45]  # Stepwise学习率衰减时的轮数
+lr_decay_factor: 0.1  # Stepwise学习率衰减系数
+
+# 数据增强
+aug_scale_min: 0.8  # 缩放最小比例
+aug_scale_max: 1.2  # 缩放最大比例
+aug_rand_hflip: true  # 随机水平翻转
+jitter_min: 0.8
+jitter_max: 1.2
+autoaugment_policy: 'v0'  # 使用AutoAugment数据增强策略
+
+# 其他训练配置
+mixed_precision: true  # 是否使用混合精度训练，可加速训练
+use_tpu: false  # 是否使用TPU训练
+use_xla: true  # 是否使用XLA加速
+
+# 输出配置
+model_dir: 'trained_models/efficientdet-gc10'  # 模型保存目录
+eval_dir: 'eval_results/efficientdet-gc10'  # 评估结果保存目录
+export_dir: 'exported_models/efficientdet-gc10'  # 导出模型保存目录
+
+# 日志配置
+log_every: 100  # 每隔多少步打印一次日志
+save_checkpoints_steps: null  # 每隔多少步保存一次检查点，null表示每个epoch保存一次
+keep_checkpoint_max: 5  # 保存最近的几个检查点
+
+# GC10-DET数据集的类别标签
+label_map: {
+  1: 'punching',
+  2: 'weld', 
+  3: 'crescent_gap', 
+  4: 'water_spot', 
+  5: 'oil_spot',
+  6: 'silk_spot', 
+  7: 'inclusion', 
+  8: 'rolled_pit', 
+  9: 'crease', 
+  10: 'waist_folding'
+} 

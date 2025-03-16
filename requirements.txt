@@ -1,0 +1,20 @@
+# EfficientDet依赖
+tensorflow==2.5.0
+tensorflow-estimator==2.5.0
+# tf-models-official>=2.9.0  # 与TensorFlow 2.5.0不兼容，使用AutoML库替代
+pycocotools>=2.0.5
+pyyaml>=6.0
+six>=1.15.0
+absl-py>=0.10.0
+tensorboard>=2.5.0
+contextlib2>=0.6.0
+
+# 通用依赖
+opencv-python>=4.5.4
+numpy>=1.19.0,<1.20.0  # TensorFlow 2.5.0兼容的NumPy版本
+Pillow>=9.0.0
+matplotlib>=3.5.0
+tqdm>=4.64.0
+scikit-learn>=1.0.2
+pandas>=1.4.0
+seaborn>=0.11.0

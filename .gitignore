@@ -1,0 +1,49 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+
+# 虚拟环境
+env/
+venv/
+ENV/
+
+# 第三方库
+automl/
+
+# 数据集和大型文件
+*.tfrecord*
+trained_models/
+exported_models/
+*.h5
+*.ckpt*
+*.pb
+
+# 编辑器配置
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# 操作系统
+.DS_Store
+Thumbs.db
+
+# 日志
+*.log
+logs/
+tensorboard_logs/
+
+# 其他
+example/
+*.tmp
+temp/
+tmp/
+
+# 保留空目录结构但不包含内容
+datasets/**/tfrecords/*
+!datasets/**/tfrecords/.gitkeep
+datasets/**/annotations/*
+!datasets/**/annotations/.gitkeep 
